@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProdutosService {
-    ProdutosRepository produtosRepository;
+    private ProdutosRepository produtosRepository;
 
     public ProdutosService(ProdutosRepository produtosRepository) {
         this.produtosRepository = produtosRepository;
     }
 
+    //cadastrar produto
     public ProdutosDTO cadastrarProdutos(ProdutosDTO produtosDTO) {
         //Validações
         Produtos novoProduto = new Produtos();
@@ -24,10 +25,7 @@ public class ProdutosService {
         novoProduto.setPrecoProduto(produtosDTO.getPrecoProduto());
         novoProduto.setQuantidade(produtosDTO.getQuantidade());
         Produtos produtosSalvo = produtosRepository.save(novoProduto);
-
-        if (produtosDTO.getQuantidade() == 0) {
-            throw new RuntimeException("Estamos sem estoque no produto:" + produtosDTO.getNomeProduto());
-        } else if (produtosDTO.getQuantidade() < 0) {
+        if (produtosDTO.getQuantidade() < 0) {
             throw new IllegalArgumentException("Digite um numero maior que -1 para cadastrar o protuto:" + produtosDTO.getNomeProduto());
         }
         return new ProdutosDTO(produtosSalvo.getNomeProduto(), produtosSalvo.getPrecoProduto(), produtosSalvo.getQuantidade());

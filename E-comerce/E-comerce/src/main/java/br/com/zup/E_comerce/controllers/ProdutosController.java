@@ -34,8 +34,9 @@ public class ProdutosController {
         try {
             produtosServices.deletarProduto(nomeProduto);
             return ResponseEntity.ok("Produto com nome: " + nomeProduto + " foi excluído com sucesso.");
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+
     }
 }

@@ -4,7 +4,7 @@ import jakarta.annotation.Nullable;
 
 public class ProdutosDTO {
     @Nullable
-    private String nomeProduto; //(não pode ser repetido).
+    private String nomeProduto;
     @Nullable
     private double precoProduto;
     private int quantidade;

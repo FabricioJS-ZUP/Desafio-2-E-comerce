@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class ClientesServices {
-    private final ClientesRepository clientesRepository;
+    private  ClientesRepository clientesRepository;
 
     public ClientesServices(ClientesRepository clientesRepository) {
         this.clientesRepository = clientesRepository;
@@ -69,19 +69,16 @@ public class ClientesServices {
             Clientes clienteSalvo = clientesRepository.save(clienteAtualizado);
             return new ClientesDTO(clienteSalvo.getCpf(), clienteSalvo.getEmail(), clienteSalvo.getNomeUsuario());
         } else {
-            // Lança exceção se o cliente não for encontrado
             throw new RuntimeException("Cliente não encontrado!");
         }
     }
 
     // Validadores
     private boolean validandoCpf(String cpf) {
-        //    return cpf != null && cpf.matches("\\d{11}");
         return cpf.matches("\\d{11}");
     }
 
     private boolean validandoEmail(String email) {
-        // Verifica se o email corresponde a um dos três padrões permitidos
         return Pattern.matches("^[\\w._%+-]+@gmail\\.com$", email) || Pattern.matches("^[\\w._%+-]+@Outlook\\.com$", email) || Pattern.matches("^[\\w._%+-]+@zup\\.com\\.br$", email);
     }
 }

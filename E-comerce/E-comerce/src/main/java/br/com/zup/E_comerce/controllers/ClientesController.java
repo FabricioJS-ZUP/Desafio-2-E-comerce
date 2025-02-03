@@ -4,6 +4,7 @@ import br.com.zup.E_comerce.dto.ClientesDTO;
 import br.com.zup.E_comerce.services.ClientesServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 //import java.util.List;
 @RestController
 @RequestMapping("/clientes")
@@ -14,11 +15,12 @@ public class ClientesController {
         this.clientesServices = clientesServices;
     }
 
-    // Criar clientes
+    // Cria clientes
     @PostMapping
     public ResponseEntity<ClientesDTO> cadastrarcliente(@RequestBody ClientesDTO clientesDTO) {
         return ResponseEntity.ok(clientesServices.cadastrarcliente(clientesDTO));
     }
+
     // Listar clientes
     @GetMapping("/{cpf}")
     public ResponseEntity<ClientesDTO> buscarClientePorCpf(@PathVariable String cpf) {
@@ -32,11 +34,11 @@ public class ClientesController {
         }
     }
 
-        // Atualizar clientes
-        @PutMapping("/{CPF}")
-        public ResponseEntity<ClientesDTO> atualizarProduto (@PathVariable String CPF, @RequestBody ClientesDTO
-        clientesDTO){
-            return ResponseEntity.ok(clientesServices.atualizarcliente(CPF, clientesDTO));
-        }
+    // Atualizar clientes
+    @PutMapping("/{CPF}")
+    public ResponseEntity<ClientesDTO> atualizarProduto(@PathVariable String CPF, @RequestBody ClientesDTO
+            clientesDTO) {
+        return ResponseEntity.ok(clientesServices.atualizarcliente(CPF, clientesDTO));
+    }
 
 }
