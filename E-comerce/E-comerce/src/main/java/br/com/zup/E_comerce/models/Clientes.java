@@ -1,33 +1,34 @@
 package br.com.zup.E_comerce.models;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
-/*
-Não será permitido cadastrar clientes com o mesmo CPF ou Email.
-O sistema deve realizar validações de dados e responder de forma padronizada os erros de
-validação.
- */
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 @Entity
+@Table(name = "tb_cadastro")
 public class Clientes {
-    private String nomeusuario;
-    private String CPF; //(único e válido).
-    private String email; //(único e válido).
+    @Id
+    @Column(unique = true)
+    private String cpf;
+    @Column(unique = true)
+    private String email;
+    @Column
+    private String nomeUsuario;
 
     public Clientes() {
     }
 
-    public Clientes(String CPF, String email, String nomeusuario) {
-        this.CPF = CPF;
+    public Clientes(String cpf, String email, String nomeUsuario) {
+        this.cpf = cpf;
         this.email = email;
-        this.nomeusuario = nomeusuario;
+        this.nomeUsuario = nomeUsuario;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
@@ -38,11 +39,11 @@ public class Clientes {
         this.email = email;
     }
 
-    public String getNomeusuario() {
-        return nomeusuario;
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    public void setNomeusuario(String nomeusuario) {
-        this.nomeusuario = nomeusuario;
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 }

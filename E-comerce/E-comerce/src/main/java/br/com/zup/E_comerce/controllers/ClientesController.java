@@ -1,43 +1,44 @@
 package br.com.zup.E_comerce.controllers;
-import  br.com.zup.E_comerce.dto.ClientesDTO;
-import  br.com.zup.E_comerce.services.ClientesServices;
+
+import br.com.zup.E_comerce.dto.ClientesDTO;
+import br.com.zup.E_comerce.services.ClientesServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
+//import java.util.List;
 @RestController
 @RequestMapping("/clientes")
 public class ClientesController {
-private final ClientesServices clientesServices;
-
-    public ClientesController() {
-    }
+    private final ClientesServices clientesServices;
 
     public ClientesController(ClientesServices clientesServices) {
         this.clientesServices = clientesServices;
     }
-    // Criar clientes
+
+    // Cria clientes
     @PostMapping
     public ResponseEntity<ClientesDTO> cadastrarcliente(@RequestBody ClientesDTO clientesDTO) {
         return ResponseEntity.ok(clientesServices.cadastrarcliente(clientesDTO));
     }
+
     // Listar clientes
-    @GetMapping
-    public ResponseEntity<List<ClientesDTO>> listarClientes() {
-        return ResponseEntity.ok(clientesServices.listarClientes());
-    }
-    // Atualizar clientes
-    @PutMapping("/{CPF}")
-    public ResponseEntity<ClientesDTO> atualizarProduto(@PathVariable String CPF, @RequestBody ClientesDTO clientesDTO) {
-        return ResponseEntity.ok(clientesServices.atualizarcliente(CPF, clientesDTO));
-    }
-    // Endpoint para deletar clientes
-    @DeleteMapping("/{CPF}")
-    public ResponseEntity<String> deletarProduto(@PathVariable String CPF) {
+    @GetMapping("/{cpf}")
+    public ResponseEntity<ClientesDTO> buscarClientePorCpf(@PathVariable String cpf) {
         try {
-            clientesServices.deletarProduto(CPF);
-            return ResponseEntity.ok("Cliente com CPF:  " + CPF + " foi excluído com sucesso.");
+            // Chama o método do Service para buscar o cliente
+            ClientesDTO cliente = clientesServices.buscarClientePorCpf(cpf);
+            return ResponseEntity.ok(cliente); // Retorna o cliente encontrado com status 200 (OK)
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            // Retorna uma mensagem de erro com status 404 (Not Found)
+            return ResponseEntity.status(404).body(null);
         }
     }
+
+    // Atualizar clientes
+    @PutMapping("/{CPF}")
+    public ResponseEntity<ClientesDTO> atualizarProduto(@PathVariable String CPF, @RequestBody ClientesDTO
+            clientesDTO) {
+        return ResponseEntity.ok(clientesServices.atualizarcliente(CPF, clientesDTO));
+    }
+
 }

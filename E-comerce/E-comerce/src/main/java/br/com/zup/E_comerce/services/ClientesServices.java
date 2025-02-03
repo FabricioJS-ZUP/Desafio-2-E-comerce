@@ -1,102 +1,84 @@
 package br.com.zup.E_comerce.services;
 
-import br.com.zup.E_comerce.models.Clientes;
 import br.com.zup.E_comerce.dto.ClientesDTO;
+import br.com.zup.E_comerce.models.Clientes;
 import br.com.zup.E_comerce.repository.ClientesRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 @Service
 public class ClientesServices {
-    private final ClientesRepository clientesRepository;
+    private  ClientesRepository clientesRepository;
 
     public ClientesServices(ClientesRepository clientesRepository) {
         this.clientesRepository = clientesRepository;
     }
 
+    //cadastrar cliente
     public ClientesDTO cadastrarcliente(ClientesDTO clientesDTO) {
-        // Validação do nome do cliente
-        if ((clientesDTO.getNomeusuarioDTO() == null)) {
-            throw new IllegalArgumentException("Nome do usuário não pode estar vazio.");
+        if (!validandoCpf(clientesDTO.getCpf())) {
+            throw new IllegalArgumentException("O CPF deve ter  11 digitos numericos.");
         }
-        /*  CPF
-        if (clientesDTO.getCPFDTO() == unique) {
-
-        } else if (clientesDTO.getCPFDTO() == valid) {
-
+        if (!validandoEmail(clientesDTO.getEmail())) {
+            throw new IllegalArgumentException("O email deve terminar com '@gmail.com', '@Outlook.com' ou @zup.com.br");
         }
-         --------------------------------
-         EMAIL
-        if (clientesDTO.getEmailDTO() == unique){
 
-        }
-        else if (clientesDTO.getEmailDTO() == valid){
-
-        }
-         */
         // Convertendo o DTO para a entidade Produtos
-        Clientes novocliente = new Clientes();
-        novocliente.setNomeusuario(clientesDTO.getNomeusuarioDTO());
-        novocliente.setCPF(clientesDTO.getCPFDTO());
-        novocliente.setEmail(clientesDTO.getEmailDTO());
+        Clientes cadastroCliente = new Clientes();
+        cadastroCliente.setNomeUsuario(clientesDTO.getNomeUsuario());
+        cadastroCliente.setCpf(clientesDTO.getCpf());
+        cadastroCliente.setEmail(clientesDTO.getEmail());
         // Salvando no banco de dados
-        Clientes clientesSalvo = clientesRepository.save(new Clientes()); //ver pq está como new ao inves de nada
+        Clientes clientesSalvo = clientesRepository.save(cadastroCliente);
+        if (clientesDTO.getCpf().length() != 11) {
+            throw new IllegalArgumentException("O cpf tem que conter 11 digitos" + "atualmente o seu contem: " + clientesDTO.getCpf() + " digitos");
+        }
+        return new ClientesDTO(clientesSalvo.getCpf(), clientesSalvo.getEmail(), clientesSalvo.getNomeUsuario());
 
-        // Retornando o produto salvo como DTO
-        return new ClientesDTO(clientesSalvo.getNomeusuario(), clientesSalvo.getCPF(), clientesSalvo.getEmail());
     }
 
-    // Listar produtos
-    public List<ClientesDTO> listarClientes() {
-        return clientesRepository.findAll().stream()
-                .map(clientes -> new ClientesDTO(clientes.getNomeusuario(), clientes.getCPF(), clientes.getEmail()))
-                .collect(Collectors.toList());
+    //Buscar cliente
+    public ClientesDTO buscarClientePorCpf(String cpf) {
+        Optional<Clientes> clienteOptional = clientesRepository.findById(cpf);
+
+        if (clienteOptional.isEmpty()) {
+            throw new IllegalArgumentException("Cliente com o CPF " + cpf + " não encontrado.");
+        }
+
+        Clientes cliente = clienteOptional.get();
+        return new ClientesDTO(cliente.getCpf(), cliente.getEmail(), cliente.getNomeUsuario());
     }
 
     // Atualizar cliente
     public ClientesDTO atualizarcliente(String CPF, ClientesDTO clientesDTO) {
-        Optional<Clientes> clientesOptional = clientesRepository.findBy(CPF);
-        // Validação do nome do cliente
-        if ((clientesDTO.getNomeusuarioDTO() == null)) {
-            throw new IllegalArgumentException("Nome do usuário não pode estar vazio.");
+        // Busca o cliente no banco de dados pelo CPF
+        Optional<Clientes> clientesOptional = clientesRepository.findById(CPF);
+        if (!validandoCpf(clientesDTO.getCpf())) {
+            throw new IllegalArgumentException("O CPF deve conter 11 dígitos numéricos.");
         }
-        /*  CPF
-        if (clientesDTO.getCPFDTO() == unique) {
-
-        } else if (clientesDTO.getCPFDTO() == valid) {
-
+        if (!validandoEmail(clientesDTO.getEmail())) {
+            throw new IllegalArgumentException("O e-mail deve terminar com '@gmail.com', '@Outlook.com' ou '@zup.com.br'.");
         }
-         --------------------------------
-         EMAIL
-        if (clientesDTO.getEmailDTO() == unique){
-
-        }
-        else if (clientesDTO.getEmailDTO() == valid){
-
-        }
-         */
         if (clientesOptional.isPresent()) {
-            Clientes clientesataulizados = clientesOptional.get();
-            clientesataulizados.setNomeusuario(clientesDTO.getNomeusuarioDTO());
-            clientesataulizados.setCPF(clientesDTO.getCPFDTO());
-            clientesataulizados.setEmail(clientesDTO.getEmailDTO());
-
-            Clientes clientesAtualizado = clientesRepository.save(clientesataulizados);
-            return new  ClientesDTO(clientesAtualizado.getNomeusuario(), clientesAtualizado.getCPF(), clientesAtualizado.getEmail());
+            Clientes clienteAtualizado = clientesOptional.get();
+            clienteAtualizado.setNomeUsuario(clientesDTO.getNomeUsuario());
+            clienteAtualizado.setCpf(clientesDTO.getCpf());
+            clienteAtualizado.setEmail(clientesDTO.getEmail());
+            Clientes clienteSalvo = clientesRepository.save(clienteAtualizado);
+            return new ClientesDTO(clienteSalvo.getCpf(), clienteSalvo.getEmail(), clienteSalvo.getNomeUsuario());
         } else {
             throw new RuntimeException("Cliente não encontrado!");
         }
-
     }
 
-    // Deletar cliente
-    public void deletarProduto(String CPF) {
-        clientesRepository.deleteBy(CPF);
+    // Validadores
+    private boolean validandoCpf(String cpf) {
+        return cpf.matches("\\d{11}");
     }
-}
 
+    private boolean validandoEmail(String email) {
+        return Pattern.matches("^[\\w._%+-]+@gmail\\.com$", email) || Pattern.matches("^[\\w._%+-]+@Outlook\\.com$", email) || Pattern.matches("^[\\w._%+-]+@zup\\.com\\.br$", email);
+    }
 }

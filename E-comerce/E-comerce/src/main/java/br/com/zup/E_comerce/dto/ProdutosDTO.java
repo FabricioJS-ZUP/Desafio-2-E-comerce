@@ -1,43 +1,36 @@
 package br.com.zup.E_comerce.dto;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
 
 public class ProdutosDTO {
-    private long id;
-    private String nomeproduto; //(não pode ser repetido).
-    private double precoproduto; //(deve ser maior que 0).
-    private int quantidade; //(deve ser maior ou igual a 0).
-
-    public ProdutosDTO(String nomeproduto, double precoproduto, int quantidade) {
+    @Nullable
+    private String nomeProduto;
+    @Nullable
+    private double precoProduto;
+    private int quantidade;
+    public ProdutosDTO() {
     }
 
-    public ProdutosDTO(long id, String nomeproduto, double precoproduto, int quantidade) {
-        this.id = id;
-        this.nomeproduto = nomeproduto;
-        this.precoproduto = precoproduto;
+    public ProdutosDTO(String nomeProduto, double precoProduto, int quantidade) {
+        this.nomeProduto = nomeProduto;
+        this.precoProduto = precoProduto;
         this.quantidade = quantidade;
     }
 
-    public long getId() {
-        return id;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
-    public String getNomeproduto() {
-        return nomeproduto;
+    public double getPrecoProduto() {
+        return precoProduto;
     }
 
-    public void setNomeproduto(String nomeproduto) {
-        this.nomeproduto = nomeproduto;
-    }
-
-    public double getPrecoproduto() {
-        return precoproduto;
-    }
-
-    public void setPrecoproduto(double precoproduto) {
-        this.precoproduto = precoproduto;
+    public void setPrecoProduto(double precoProduto) {
+        this.precoProduto = precoProduto;
     }
 
     public int getQuantidade() {
