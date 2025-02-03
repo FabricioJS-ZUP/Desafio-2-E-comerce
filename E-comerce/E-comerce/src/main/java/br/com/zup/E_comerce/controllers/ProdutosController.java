@@ -9,16 +9,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
-public class ProdutosController  {
+public class ProdutosController {
     private final ProdutosService produtosServices;
 
     public ProdutosController(ProdutosService produtosServices) {
         this.produtosServices = produtosServices;
     }
+
     // Criar produto
     @PostMapping
-    public ResponseEntity<ProdutosDTO> cadastrarprodutos(@RequestBody ProdutosDTO produtosDTO) {
-        return ResponseEntity.ok(produtosServices.cadastrarprodutos(produtosDTO));
+    public ResponseEntity<ProdutosDTO> cadastrarProdutos(@RequestBody ProdutosDTO produtosDTO) {
+        return ResponseEntity.ok(produtosServices.cadastrarProdutos(produtosDTO));
     }
 
     // Listar produtos
@@ -27,19 +28,13 @@ public class ProdutosController  {
         return ResponseEntity.ok(produtosServices.listarProdutos());
     }
 
-    // Atualizar produto
-    @PutMapping("/{id}")
-    public ResponseEntity<ProdutosDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutosDTO produtosDTO) {
-        return ResponseEntity.ok(produtosServices.atualizarProduto(id, produtosDTO));
-    }
-
     // Endpoint para deletar produto
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarProduto(@PathVariable Long id) {
+    @DeleteMapping("/{nomeProduto}")
+    public ResponseEntity<String> deletarProduto(@PathVariable String nomeProduto) {
         try {
-            produtosServices.deletarProduto(id);
-            return ResponseEntity.ok("Produto com ID " + id + " foi excluído com sucesso.");
-        } catch (IllegalArgumentException e) {
+            produtosServices.deletarProduto(nomeProduto);
+            return ResponseEntity.ok("Produto com nome: " + nomeProduto + " foi excluído com sucesso.");
+        }catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

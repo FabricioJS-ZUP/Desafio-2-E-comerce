@@ -1,51 +1,43 @@
 package br.com.zup.E_comerce.models;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-/*
-Não será permitido cadastrar produtos com o mesmo nome.
- */
 @Entity
+@Table(name = "tb_cadastro_Produtos")
 public class Produtos {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @Column(unique = true)
-    private String nomeproduto;
-    private double precoproduto;
+    private String nomeProduto;
+    @Column
+    private double precoProduto;
+    @Column
     private int quantidade;
 
     public Produtos() {
     }
 
-    public Produtos(long id, String nomeproduto, double precoproduto, int quantidade) {
-        this.id = id;
-        this.nomeproduto = nomeproduto;
-        this.precoproduto = precoproduto;
+    public Produtos(String nomeProduto, double precoProduto, int quantidade) {
+        this.nomeProduto = nomeProduto;
+        this.precoProduto = precoProduto;
         this.quantidade = quantidade;
     }
 
-    public long getId() {
-        return id;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
-    public String getNomeproduto() {
-        return nomeproduto;
+    public double getPrecoProduto() {
+        return precoProduto;
     }
 
-    public void setNomeproduto(String nomeproduto) {
-        this.nomeproduto = nomeproduto;
-    }
-
-    public double getPrecoproduto() {
-        return precoproduto;
-    }
-
-    public void setPrecoproduto(double precoproduto) {
-        this.precoproduto = precoproduto;
+    public void setPrecoProduto(double precoProduto) {
+        this.precoProduto = precoProduto;
     }
 
     public int getQuantidade() {

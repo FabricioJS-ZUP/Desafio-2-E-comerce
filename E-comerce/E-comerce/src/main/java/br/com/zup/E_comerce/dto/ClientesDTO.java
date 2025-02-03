@@ -1,50 +1,46 @@
 package br.com.zup.E_comerce.dto;
 
+
+import jakarta.annotation.Nullable;
+
 public class ClientesDTO {
-    private long id;
-    private String nomeusuarioDTO;
-    private String CPFDTO; //(único e válido).
-    private String emailDTO; //(único e válido).
+    @Nullable
+    private String cpf;
+    @Nullable
+    private String email;
+    @Nullable
+    private String nomeUsuario;
 
     public ClientesDTO() {
     }
 
-    public ClientesDTO(String CPFDTO, String emailDTO, long id, String nomeusuarioDTO) {
-        this.CPFDTO = CPFDTO;
-        this.emailDTO = emailDTO;
-        this.id = id;
-        this.nomeusuarioDTO = nomeusuarioDTO;
+    public ClientesDTO(String cpf, String email, String nomeUsuario) {
+        this.cpf = cpf;
+        this.email = email;
+        this.nomeUsuario = nomeUsuario;
     }
 
-    public long getId() {
-        return id;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getCPFDTO() {
-        return CPFDTO;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCPFDTO(String CPFDTO) {
-        this.CPFDTO = CPFDTO;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getEmailDTO() {
-        return emailDTO;
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    public void setEmailDTO(String emailDTO) {
-        this.emailDTO = emailDTO;
-    }
-
-    public String getNomeusuarioDTO() {
-        return nomeusuarioDTO;
-    }
-
-    public void setNomeusuarioDTO(String nomeusuarioDTO) {
-        this.nomeusuarioDTO = nomeusuarioDTO;
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 }

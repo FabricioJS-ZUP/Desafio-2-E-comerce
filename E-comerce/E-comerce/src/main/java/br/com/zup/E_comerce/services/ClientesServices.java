@@ -1,14 +1,12 @@
 package br.com.zup.E_comerce.services;
 
-import br.com.zup.E_comerce.models.Clientes;
 import br.com.zup.E_comerce.dto.ClientesDTO;
+import br.com.zup.E_comerce.models.Clientes;
 import br.com.zup.E_comerce.repository.ClientesRepository;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 @Service
 public class ClientesServices {
@@ -18,68 +16,72 @@ public class ClientesServices {
         this.clientesRepository = clientesRepository;
     }
 
+    //cadastrar cliente
     public ClientesDTO cadastrarcliente(ClientesDTO clientesDTO) {
-        if ((clientesDTO.getNomeusuarioDTO() == null)) {
-            throw new IllegalArgumentException("Nome do usuário não pode estar vazio.");
+        if (!validandoCpf(clientesDTO.getCpf())) {
+            throw new IllegalArgumentException("O CPF deve ter  11 digitos numericos.");
         }
-        if (clientesDTO.getCPFDTO().length() != 11) {
-            throw new IllegalArgumentException("O cpf tem que conter 11 digitos" + "atualmente o seu contem: " + clientesDTO.getCPFDTO() + " digitos");
-        } else if (clientesDTO.getCPFDTO() == null) {
-            throw new IllegalArgumentException("Voce não escreveu nada no campo de cpf");
-        } //colocar um validador para ver se so contem apenas numeros no cpf
-        //melhorar o validador de emails para pegar os tipos de emails mais usados
-        if (clientesDTO.getEmailDTO().lastIndexOf("@gmail.com") != clientesDTO.getEmailDTO().lastIndexOf("@gmail.com")) { //ver se este .lastIndexOf pega os ultimos caracteres e deixa neste formato
-            throw new IllegalArgumentException("Só aceitamos emails com o ginal : @gmail.com");
+        if (!validandoEmail(clientesDTO.getEmail())) {
+            throw new IllegalArgumentException("O email deve terminar com '@gmail.com', '@Outlook.com' ou @zup.com.br");
         }
+
         // Convertendo o DTO para a entidade Produtos
-        Clientes clientes = new Clientes();
-        clientes.setNomeusuario(clientesDTO.getNomeusuarioDTO());
-        clientes.setCPF(clientesDTO.getCPFDTO());
-        clientes.setEmail(clientesDTO.getEmailDTO());
+        Clientes cadastroCliente = new Clientes();
+        cadastroCliente.setNomeUsuario(clientesDTO.getNomeUsuario());
+        cadastroCliente.setCpf(clientesDTO.getCpf());
+        cadastroCliente.setEmail(clientesDTO.getEmail());
         // Salvando no banco de dados
-        Clientes clientesSalvo = clientesRepository.save(clientes);
-        // Retornando o produto salvo como DTO
-        return new ClientesDTO(clientesSalvo.getCPF(), clientesSalvo.getEmail(), clientesSalvo.getId(), clientesSalvo.getNomeusuario());
+        Clientes clientesSalvo = clientesRepository.save(cadastroCliente);
+        if (clientesDTO.getCpf().length() != 11) {
+            throw new IllegalArgumentException("O cpf tem que conter 11 digitos" + "atualmente o seu contem: " + clientesDTO.getCpf() + " digitos");
+        }
+        return new ClientesDTO(clientesSalvo.getCpf(), clientesSalvo.getEmail(), clientesSalvo.getNomeUsuario());
+
     }
 
-    // Listar produtos
-    public List<ClientesDTO> listarClientes() {
-        return clientesRepository.findAll().stream()
-                .map(clientes -> new ClientesDTO(clientes.getCPF(), clientes.getEmail(), clientes.getId(), clientes.getNomeusuario()))
-                .collect(Collectors.toList());
+    //Buscar cliente
+    public ClientesDTO buscarClientePorCpf(String cpf) {
+        Optional<Clientes> clienteOptional = clientesRepository.findById(cpf);
+
+        if (clienteOptional.isEmpty()) {
+            throw new IllegalArgumentException("Cliente com o CPF " + cpf + " não encontrado.");
+        }
+
+        Clientes cliente = clienteOptional.get();
+        return new ClientesDTO(cliente.getCpf(), cliente.getEmail(), cliente.getNomeUsuario());
     }
 
     // Atualizar cliente
-    public ClientesDTO atualizarcliente(Long id, ClientesDTO clientesDTO) {
-        Optional<Clientes> clientesOptional = clientesRepository.findById(id);
-        if ((clientesDTO.getNomeusuarioDTO() == null)) {
-            throw new IllegalArgumentException("Nome do usuário não pode estar vazio.");
+    public ClientesDTO atualizarcliente(String CPF, ClientesDTO clientesDTO) {
+        // Busca o cliente no banco de dados pelo CPF
+        Optional<Clientes> clientesOptional = clientesRepository.findById(CPF);
+        if (!validandoCpf(clientesDTO.getCpf())) {
+            throw new IllegalArgumentException("O CPF deve conter 11 dígitos numéricos.");
         }
-        if (clientesDTO.getCPFDTO().length() != 11) {
-            throw new IllegalArgumentException("O cpf tem que conter 11 digitos" + "atualmente o seu contem: " + clientesDTO.getCPFDTO() + " digitos");
-        } else if (clientesDTO.getCPFDTO() == null) {
-            throw new IllegalArgumentException("Voce não escreveu nada no campo de cpf");
-        } //colocar um validador para ver se so contem apenas numeros no cpf
-        //melhorar o validador de emails para pegar os tipos de emails mais usados
-        if (clientesDTO.getEmailDTO().lastIndexOf("@gmail.com") != clientesDTO.getEmailDTO().lastIndexOf("@gmail.com")) { //ver se este .lastIndexOf pega os ultimos caracteres e deixa neste formato
-            throw new IllegalArgumentException("Só aceitamos emails com o ginal : @gmail.com");
+        if (!validandoEmail(clientesDTO.getEmail())) {
+            throw new IllegalArgumentException("O e-mail deve terminar com '@gmail.com', '@Outlook.com' ou '@zup.com.br'.");
         }
         if (clientesOptional.isPresent()) {
-            Clientes clientesataulizados = clientesOptional.get();
-            clientesataulizados.setNomeusuario(clientesDTO.getNomeusuarioDTO());
-            clientesataulizados.setCPF(clientesDTO.getCPFDTO());
-            clientesataulizados.setEmail(clientesDTO.getEmailDTO());
-
-            Clientes clientesAtualizado = clientesRepository.save(clientesataulizados);
-            return new ClientesDTO(clientesAtualizado.getCPF(), clientesAtualizado.getEmail(), clientesAtualizado.getId(), clientesAtualizado.getNomeusuario());
+            Clientes clienteAtualizado = clientesOptional.get();
+            clienteAtualizado.setNomeUsuario(clientesDTO.getNomeUsuario());
+            clienteAtualizado.setCpf(clientesDTO.getCpf());
+            clienteAtualizado.setEmail(clientesDTO.getEmail());
+            Clientes clienteSalvo = clientesRepository.save(clienteAtualizado);
+            return new ClientesDTO(clienteSalvo.getCpf(), clienteSalvo.getEmail(), clienteSalvo.getNomeUsuario());
         } else {
+            // Lança exceção se o cliente não for encontrado
             throw new RuntimeException("Cliente não encontrado!");
         }
-
     }
 
-    // Deletar cliente
-    public void deletarCLIENTE(Long id) {
-        clientesRepository.deleteById(id);
+    // Validadores
+    private boolean validandoCpf(String cpf) {
+        //    return cpf != null && cpf.matches("\\d{11}");
+        return cpf.matches("\\d{11}");
+    }
+
+    private boolean validandoEmail(String email) {
+        // Verifica se o email corresponde a um dos três padrões permitidos
+        return Pattern.matches("^[\\w._%+-]+@gmail\\.com$", email) || Pattern.matches("^[\\w._%+-]+@Outlook\\.com$", email) || Pattern.matches("^[\\w._%+-]+@zup\\.com\\.br$", email);
     }
 }

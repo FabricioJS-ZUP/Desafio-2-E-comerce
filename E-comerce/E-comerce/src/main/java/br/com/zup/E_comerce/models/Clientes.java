@@ -1,52 +1,34 @@
 package br.com.zup.E_comerce.models;
-
-import jakarta.persistence.*;
-
-import jakarta.persistence.Entity;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 @Entity
 @Table(name = "tb_cadastro")
 public class Clientes {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Id
     @Column(unique = true)
-    private String CPF;
-
+    private String cpf;
+    @Column(unique = true)
     private String email;
-
     @Column
-    private String nomeusuario;
+    private String nomeUsuario;
 
     public Clientes() {
     }
 
-    public Clientes(String CPF, String email, long id, String nomeusuario) {
-        this.CPF = CPF;
+    public Clientes(String cpf, String email, String nomeUsuario) {
+        this.cpf = cpf;
         this.email = email;
-        this.id = id;
-        this.nomeusuario = nomeusuario;
+        this.nomeUsuario = nomeUsuario;
     }
 
-    public long getId() {
-        return id;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
@@ -57,11 +39,11 @@ public class Clientes {
         this.email = email;
     }
 
-    public String getNomeusuario() {
-        return nomeusuario;
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    public void setNomeusuario(String nomeusuario) {
-        this.nomeusuario = nomeusuario;
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 }
