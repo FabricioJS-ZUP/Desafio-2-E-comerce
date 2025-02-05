@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="E-comerce">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/E-comerce.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
