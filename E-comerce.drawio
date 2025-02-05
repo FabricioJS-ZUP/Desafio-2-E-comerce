@@ -215,42 +215,52 @@
     </mxGraphModel>
   </diagram>
   <diagram id="iXi1bBOm4YuRNDzih2M3" name="Compras">
-    <mxGraphModel dx="1157" dy="409" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1331" dy="470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="vmWWjcO_iuHFvJZnxMsg-1" value="&lt;pre style=&quot;font-size: 28px; line-height: 36px; background-color: rgb(248, 249, 250); border: none; padding: 2px 0.14em 2px 0px; position: relative; margin-top: -2px; margin-bottom: -2px; resize: none; font-family: inherit; overflow: hidden; text-align: left; width: 270px; text-wrap-mode: wrap; overflow-wrap: break-word; color: rgb(31, 31, 31);&quot; aria-label=&quot;Texto traduzido: Connects with the classes: Products, ProductsRepository, and ProductsDTO&quot; dir=&quot;ltr&quot; data-ved=&quot;2ahUKEwic_PuigaeLAxVDr5UCHYyUDHMQ3ewLegQIBxAV&quot; id=&quot;tw-target-text&quot; data-placeholder=&quot;Tradução&quot; class=&quot;tw-data-text tw-text-large tw-ta&quot;&gt;&lt;span lang=&quot;en&quot; class=&quot;Y2IQFc&quot;&gt;Connects with the classes: Produtos, ProdutosRepository, and ProdutosDTO&lt;/span&gt;&lt;/pre&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="vmWWjcO_iuHFvJZnxMsg-1" value="&lt;pre style=&quot;font-size: 28px; line-height: 36px; background-color: rgb(248, 249, 250); border: none; padding: 2px 0.14em 2px 0px; position: relative; margin-top: -2px; margin-bottom: -2px; resize: none; font-family: inherit; overflow: hidden; text-align: left; width: 270px; text-wrap-mode: wrap; overflow-wrap: break-word; color: rgb(31, 31, 31);&quot; aria-label=&quot;Texto traduzido: Connects with the classes: Products, ProductsRepository, and ProductsDTO&quot; dir=&quot;ltr&quot; data-ved=&quot;2ahUKEwic_PuigaeLAxVDr5UCHYyUDHMQ3ewLegQIBxAV&quot; id=&quot;tw-target-text&quot; data-placeholder=&quot;Tradução&quot; class=&quot;tw-data-text tw-text-large tw-ta&quot;&gt;&lt;span lang=&quot;en&quot; class=&quot;Y2IQFc&quot;&gt;Connects with the classes: Produtos, ProdutosRepository, and ProdutosDTO&lt;/span&gt;&lt;/pre&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="50" y="40" width="290" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="XhHD3sOlI4BIIbxMwPK2-1" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;" edge="1" parent="1">
+        <mxCell id="XhHD3sOlI4BIIbxMwPK2-1" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;" parent="1" edge="1">
           <mxGeometry width="100" relative="1" as="geometry">
             <mxPoint x="250" y="200" as="sourcePoint" />
             <mxPoint x="350" y="370" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XhHD3sOlI4BIIbxMwPK2-2" value="&lt;div style=&quot;&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;ComprasServices&lt;/font&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="XhHD3sOlI4BIIbxMwPK2-2" value="&lt;div style=&quot;&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;ComprasServices&lt;/font&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="340" y="380" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="XhHD3sOlI4BIIbxMwPK2-3" value="&lt;pre style=&quot;font-size: 28px; line-height: 36px; background-color: rgb(248, 249, 250); border: none; padding: 2px 0.14em 2px 0px; position: relative; margin-top: -2px; margin-bottom: -2px; resize: none; font-family: inherit; overflow: hidden; text-align: left; width: 270px; text-wrap-mode: wrap; overflow-wrap: break-word; color: rgb(31, 31, 31);&quot; aria-label=&quot;Texto traduzido: Connects with the classes: Products, ProductsRepository, and ProductsDTO&quot; dir=&quot;ltr&quot; data-ved=&quot;2ahUKEwic_PuigaeLAxVDr5UCHYyUDHMQ3ewLegQIBxAV&quot; id=&quot;tw-target-text&quot; data-placeholder=&quot;Tradução&quot; class=&quot;tw-data-text tw-text-large tw-ta&quot;&gt;&lt;span lang=&quot;en&quot; class=&quot;Y2IQFc&quot;&gt;Connects with the classes: Clientes, ClientesRepository, and ClientesDTO&lt;/span&gt;&lt;/pre&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="XhHD3sOlI4BIIbxMwPK2-3" value="&lt;pre style=&quot;font-size: 28px; line-height: 36px; background-color: rgb(248, 249, 250); border: none; padding: 2px 0.14em 2px 0px; position: relative; margin-top: -2px; margin-bottom: -2px; resize: none; font-family: inherit; overflow: hidden; text-align: left; width: 270px; text-wrap-mode: wrap; overflow-wrap: break-word; color: rgb(31, 31, 31);&quot; aria-label=&quot;Texto traduzido: Connects with the classes: Products, ProductsRepository, and ProductsDTO&quot; dir=&quot;ltr&quot; data-ved=&quot;2ahUKEwic_PuigaeLAxVDr5UCHYyUDHMQ3ewLegQIBxAV&quot; id=&quot;tw-target-text&quot; data-placeholder=&quot;Tradução&quot; class=&quot;tw-data-text tw-text-large tw-ta&quot;&gt;&lt;span lang=&quot;en&quot; class=&quot;Y2IQFc&quot;&gt;Connects with the classes: Clientes, ClientesRepository, and ClientesDTO&lt;/span&gt;&lt;/pre&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="450" y="40" width="290" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="XhHD3sOlI4BIIbxMwPK2-4" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;" edge="1" parent="1">
+        <mxCell id="XhHD3sOlI4BIIbxMwPK2-4" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;" parent="1" edge="1">
           <mxGeometry width="100" relative="1" as="geometry">
             <mxPoint x="590" y="200" as="sourcePoint" />
             <mxPoint x="480" y="370" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9lr3WNnK-CqKZSDyOuKJ-1" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="XhHD3sOlI4BIIbxMwPK2-2">
+        <mxCell id="9lr3WNnK-CqKZSDyOuKJ-1" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="XhHD3sOlI4BIIbxMwPK2-2" edge="1">
           <mxGeometry width="100" relative="1" as="geometry">
             <mxPoint x="370" y="560" as="sourcePoint" />
             <mxPoint x="410" y="550" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9lr3WNnK-CqKZSDyOuKJ-3" value="ComprasController" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="9lr3WNnK-CqKZSDyOuKJ-3" value="ComprarController" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="340" y="555" width="140" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="FXqDOjnuD8po28-jn0vr-2" value="&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Compras e Produtos Request&lt;/span&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="670" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="FXqDOjnuD8po28-jn0vr-3" value="" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;startArrow=classic;endSize=8;startSize=8;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="9lr3WNnK-CqKZSDyOuKJ-3">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="530" y="700" as="sourcePoint" />
+            <mxPoint x="410" y="670" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
